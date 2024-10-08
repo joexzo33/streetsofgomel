@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="streetcards.css">
+    <title>Карточка Центрального района</title>
+    <style>
+           #info-slider {
+  position: fixed;
+  top: 0;
+  right: -600px;
+  width: 600px;
+  height: 100%;
+  max-height: 100vh; /* Ограничиваем высоту слайдера размером экрана */
+  box-sizing: border-box; /* Включаем padding в расчеты ширины и высоты */
+  background: rgba(108, 150, 223, 0.3);
+  backdrop-filter: blur(10px); /* Эффект размытия фона */
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Полупрозрачная рамка */
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px 20px rgba(0, 0, 0, 0.17);
+  box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+  box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+  transition: right 0.5s ease;
+  padding: 40px 30px 20px 0px; /* Паддинг сверху, справа и снизу */
+  z-index: 1000;
+  overflow-y: auto; /* Вертикальный скролл при переполнении */
+  overflow-x: hidden; /* Отключаем горизонтальный скролл */
+}
+
+
+
+        #info-slider.active {
+            right: 0;
+        }
+
+        #info-slider h2 {
+            margin-top: 0;
+        }
+
+        #info-slider img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .close-slider {
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="profile-card js-profile-card">
+            <div class="profile-card__img">
+                <img src="https://gp.by/upload/medialibrary/c2c/c2c81bb24440c5e834046dea73f6b9c7.JPG" alt="profile card">
+            </div>
+        
+            <div class="profile-card__cnt js-profile-cnt">
+                <div class="profile-card__name">Центральный район</div>
+                <div class="profile-card__txt">Население: 80 000<strong> человек</strong></div>
+                <div class="profile-card-loc">
+                    <span class="profile-card-loc__icon">
+                        <svg class="icon"><use xlink:href="#icon-location"></use></svg>
+                    </span>
+                    <span class="profile-card-loc__txt">Гомель, Беларусь</span>
+                </div>
+        
+                <div class="profile-card-inf">
+                    <!-- Улица Мазурова -->
+                    <div class="profile-card-inf__item">
+                        <a href="#" id="mazurova-link" class="profile-card-inf__title">
+                            ул. Мазурова
+                        </a>
+                        <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                    </div>
+
+                    <!-- Другие улицы -->
+                    <div class="profile-card-inf__item">
+                        <a href="#" id="golovackogo-link" class="profile-card-inf__title">ул. Головацкого</a>
+                        <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                    </div>
+                    <div class="profile-card-inf__item">
+                        <a href="#" id="khataevicha-link" class="profile-card-inf__title">ул. Хатаевича</a>
+                        <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                    </div>
+                    <div class="profile-card-inf__item">
+                        <a href="#" id="katunina-link" class="profile-card-inf__title">ул. Катунина</a>
+                        <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                    </div>
+                    <div class="profile-card-inf__item">
+                        <a href="#" id="dokutovich-link" class="profile-card-inf__title">ул. Докутович</a>
+                        <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                    </div>
+                    <div class="profile-card-inf__item">
+                        <a href="#" id="kozhara-link" class="profile-card-inf__title">ул. Кожара</a>
+                        <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                    </div>
+                    <div class="profile-card-inf__item">
+                        <a href="#" id="sviridova-link" class="profile-card-inf__title">ул. Свиридова</a>
+                        <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                    </div>
+                    <div class="profile-card-inf__item">
+                        <a href="#" id="pedchenko-link" class="profile-card-inf__title">ул. Педченко</a>
+                        <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                    </div>
+                    <div class="profile-card-inf__item">
+                        <a href="#" id="landysheva-link" class="profile-card-inf__title">ул. Ландышева</a>
+                        <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                    </div>
+                    <div class="profile-card-inf__item">
+                        <a href="#" id="telegin-link" class="profile-card-inf__title">ул. Телегина</a>
+                        <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                    </div>
+                    <div class="profile-card-inf__item">
+                     <a href="#" id="borodina-link" class="profile-card-inf__title">ул. Бородина</a>
+                     <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                 </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайдер с информацией -->
+        <div id="info-slider">
+            <span class="close-slider" onclick="closeSlider()">&times;</span>
+            <img id="slider-img" src="" alt="Улица фото">
+            <h2 id="slider-title"></h2>
+            <p id="slider-text"></p>
+        </div>
+    </div>
+    
+    <script>
+        // Данные по улицам
+        const streetData = {
+            'mazurova': {
+                title: 'Улица Мазурова',
+                text: 'Мазуров Кирилл Трофимович (1914 – 1989) – государственный и политический деятель, Герой Социалистического труда. <img src="https://www.mazyr.by/wp-content/uploads/2024/04/nqOLnamhLzzqasXCrRItZTlKIqTnVeBK.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Родился в деревне Рудня-Прибытковская Гомельского района Гомельской области. В 1933 г. окончил Гомельский автодорожный техникум. С первых дней войны был в действующей армии. С 1942 г. находился на оккупированной территории Беларуси со спецзаданием. Представитель Центрального штаба партизанского движения. <img src="https://avatars.mds.yandex.net/get-altay/11873493/2a000001910e10f5ca6188b6acde46d71c8a/orig" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Секретарь подпольного ЦК ЛКСМБ Мазуров принимал активное участие в организации комсомольского подполья и партизанского движения в Беларуси. С 1943 г. – второй, а с 1944 г. первый секретарь ЦК ЛКСМБ.',
+                img: 'https://photos.wikimapia.org/p/00/05/86/65/82_full.jpg'
+            },
+            'golovackogo': {
+                title: 'Улица Головацкого',
+                text: 'В годы Великой Отечественной войны был участником освобождения г. Гомеля от немецко-фашистских захватчиков. Работал счетоводом, председателем колхоза. С 1936 г. <img src="http://milglory.gomel.museum.by/files/styles/large/public/node_images/golovatskiy.jpg?itok=XeZctwld" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Григорий Матвеевич в Красной Армии, политработник. С ноября 1943 г. – заместитель командира артполка по политчасти, майор. Сражался в составе 22-й артиллерийской дивизии 316-го артиллерийского полка, всё время находясь на передовой позиции. После ранения командира принял на себя командование полком в боях за Гомель. 12 декабря 1943 г. погиб во время ожесточённых боёв.',
+                img: 'https://avatars.mds.yandex.net/i?id=3b385a43cd4fc41f7003cc9bfe297d3b_l-5220454-images-thumbs&n=13'
+            },
+            'khataevicha': {
+                title: 'Улица Хатаевича',
+                text: 'Хатаевич Мендэль Маркович (10.3.1893, г. Гомель — 30.10.1937, г. Москва), партийный и государственный деятель, участник борьбы за власть Советов в Беларуси. <img src="https://russian7.ru/wp-content/uploads/2021/05/11-15.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> <br><span style="display: block; text-indent: 20px;">С 1912 г. вёл подпольную работу на предприятиях Гомеля. С 1913 г. член Полесского комитета РСДРП. В 1914 г. арестован и сослан в Сибирь (1915-1917). С марта 1917 г. возглавил Гомельскую организацию РСДРП(б), с сентября 1917 г. член Северо-Западного областного комитета РСДРП(б), член Исполкома Гомельского Совета.</span><br><span style="display: block; text-indent: 20px;">После оккупации Гомеля кайзеровскими войсками (1918) был направлен в Самару. Был ранен, попал в плен к белогвардейцам. <img src="https://gde.by/images/img_by/700/8d/d1/8dd11e31c00358756fca2f92b037c33f.webp" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Из тюрьмы освобожден после освобождения города. В 1919 г. вернулся в Гомель, где пробыл недолго, направлен в Самарский губернский комитет, затем на Западный фронт. С 1921 г. секретарь Гомельского, с 1923 г. — Одесского губкомов РКП(б). В 1924-1925 гг. в аппарате ЦК ВКП(б). С 1925 г. — секретарь Татарского обкома, с 1928 г. — Средневолжского крайкома ВКП(б).</span><br><span style="display: block; text-indent: 20px;"> С октября 1932 г. — секретарь ЦК КП(б)У, одновременно (с января 1933) Днепропетровского обкома КП(б), с марта 1939 г. — второй секретарь ЦК КП(б)У. В 1932-1937 гг. <img src="https://1gomel.by/wp-content/uploads/2018/05/billboard_31a_3-1.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> член Политбюро ЦК КП(б)У. На XIV съезде ВКП(б) избран членом Центральной ревизионной комиссии, на XV съезде ВКП(б) — кандидат в члены ЦК, на XVI и XVII съездах ВКП(б) — член ЦК.</span><br><span style="display: block; text-indent: 20px;">Награждён орденом Ленина (1937).</span>',
+                img: 'https://1gomel.by/wp-content/uploads/2018/10/billboard_236a1-1.jpg'
+            },
+            'katunina': {
+                title: 'Улица Катунина',
+                text: ' Катунин Илья Борисович - заместитель командира эскадрильи 46-го штурмового авиационного полка Военно-воздушных сил Северного флота, капитан. <img src="https://goarctic.ru/upload/iblock/238/238194d33f25f38e417d3af9e8fb25c3.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> <p style="text-indent: 20px;"> Родился 17 ноября 1908 года в городе Гомель (Белоруссия) в семье рабочего. Еврей. Член ВКП(б) с 1931 года. Окончив среднюю школу, в 1927-1931 годах работал слесарем на станкостроительном заводе «Пролетарий» в Гомеле. <p style="text-indent: 20px;">    В Военно-Морском Флоте в 1932-1935 годах и с 1941 года. В 1935 году окончил Ейскую школу морских лётчиков. <img src="https://avatars.mds.yandex.net/i?id=71b5dbd40772da88a6e8e5f311bfa9f6_l-9847625-images-thumbs&n=13" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Работал в Бежицком и Брянском аэроклубах. <p style="text-indent: 20px;">  С июля 1941 года Катунин был инструктором в 8-й военной авиашколе первоначального обучения. За 1,5 года он подал множество рапортов с просьбой отправить на фронт, но только в начале 1943 года, после переподготовки в запасном полку, Катунин был направлен в Заполярье, в 46-й штурмовой авиаполк Северного флота. <p style="text-indent: 20px;"> Заместитель командира <img src="https://avatars.mds.yandex.net/i?id=d03d84479a615195ef216631c11bdd29_l-9099210-images-thumbs&n=13" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> эскадрильи 46-го штурмового авиаполка ВВС Северного флота капитан Катунин И.Б. к апрелю 1944 года совершил 12 боевых вылетов на штурмовку, потопил 2 вражеских транспорта, мотобот и шхуну. <p style="text-indent: 20px;">  Указом Президиума Верховного Совета СССР от 31 мая 1944 года капитану Катунину Илье Борисовичу присвоено звание Героя Советского Союза (посмертно). Награждён орденами Ленина, Красного Знамени.',
+                img: 'https://avatars.mds.yandex.net/i?id=cdd671cdb6b07c52894eae0717c2743d_l-5210027-images-thumbs&n=13'
+            },
+            'dokutovich': {
+                title: 'Улица Докутович',
+                text: 'В 1938 г. окончила Гомельский аэроклуб. Училась в Московском авиационном институте. В 1941 г. добровольцем ушла на фронт. Была штурманом самолета 46-го гвардейского Таманского авиаполка легких ночных бомбардировщиков, мл. лейтенант. Совершила 136 боевых вылетов. Летом 1942 г. получила тяжелое повреждение позвоночника. <img src="https://r.mt.ru/r18/photo4221/20685415695-0/jpeg/wnd.webp" alt="Дополнительная картинка" style="float: left; margin: 10px; width:200px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> После лечения вернулась в полк. Погибла при выполнении боевого задания над ст. Крымская (ныне г. Крымск) Краснодарского края. Похоронена в станице Русская Краснодарского края в братской могиле, где на мемориальной плите начертано ее имя. Именем Г. И. Докутович названа улица в Гомеле;  на здании Гомельского политехникума (ул. Билецкого, 6), в котором размещалась школа, где в 1933 — 1936 гг. училась Г. И. Докутович , установлена мемориальная доска. ',
+                img: 'https://avatars.mds.yandex.net/i?id=3e9d670745919591e538234d028824d9_l-5029416-images-thumbs&n=13'
+            },
+            'kozhara': {
+                title: 'Улица Кожара',
+                text: 'Кожар Илья Павлович (21.7.1902, д. Малое Гальцево Толочинского р-на Витебск. обл. — 13.10.1967, г. Минск), один из организаторов и руководителей подполья и партизанского движения в Гомел. обл. в годы Великой Отечественной войны. Герой Советского Союза (1944). Генерал-майор (1943). <p style="text-indent: 20px;"> <img src="https://avatars.mds.yandex.net/i?id=41313f7a01660f0592c4e189c5388e46_l-4366154-images-thumbs&n=13" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> С 1940 г. редактор газеты «Гомельская праўда», секретарь Гомельского обкома КП(б)Б. В авг. 1941 г. — нояб. 1943 г. секретарь Гомельского подпольного обкома КП(б)Б, одновременно с нояб. 1942 г. командир Гомельского партизанского соединения. <img src="https://avatars.mds.yandex.net/i?id=d11674e58eb34bf3bd01a489da4b8796_l-5240239-images-thumbs&n=13" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> С 1943 г. секретарь Гомельского обкома КП(б)Б, в аппарате ЦК КП(б)Б. В 1947-1963 гг. директор Республиканской партийной школы при ЦК КПБ (с 1956 г. Минской ВПШ). С 1961 г. член, в 1963-1966 гг. председатель <img src="https://avatars.mds.yandex.net/i?id=2eb78f2eb66e6cc5e7b9fac0c3ef8664_l-5250168-images-thumbs&n=13" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Ревизионной комиссии КПБ. Депутат Верховного Совета БССР в 1951-1963 гг., 1967 г. <p style="text-indent: 20px;"> Его именем названы улицы в Гомеле, Кохановская школа в Витебской обл.; на здании Минской ВПШ мемориальная доска.',
+                img: 'https://avatars.mds.yandex.net/i?id=5c0170e1354d9db858ca759edaeb02f9_l-5221577-images-thumbs&n=13'
+            },
+            'sviridova': {
+                title: 'Улица Свиридова',
+                text: 'Свиридов Алексей Андреевич (1919 – 1943) – Герой Советского Союза (1944), участник освобождения Беларуси от немецко-фашистских захватчиков, командир эскадрильи 128-го бомбардировочного авиаполка 241-й бомбардировочной авиадивизии 3-го бомбардировочного авиационного корпуса 16-й воздушной армии, старший лейтенант. <p style="text-indent: 20px;">Родился в д. Ступишино Тульской области. <img src="https://3.bp.blogspot.com/-VzbFfY-jvVE/Wa7sgTA7bPI/AAAAAAAAQCw/sbTiMNC1MPYq0Ij9q5hgvdJgQ2dcyW3-gCKgBGAs/s1600/P9020020.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> В 1935 г. с семьёй переехал в Москву, где в августе 1937 г. окончил школу фабрично-заводского обучения при заводе им. Ворошилова.</p><p style="text-indent: 20px;">С 1938 в Красной Армии. Окончил военное авиационное училище (1939). На фронтах Великой Отечественной войны с июня 1941 г., лётчик – бомбардировщик.</p><p style="text-indent: 20px;">К октябрю 1943 г. Свиридов совершил 205 боевых вылетов.</p><p style="text-indent: 20px;">6 октября 1943 г. <img src="https://avatars.mds.yandex.net/i?id=5abc44232b5b773e7ae10286bcd83837_l-4987773-images-thumbs&n=13" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> эскадрилья во главе с Алексеем Андреевичем бомбила железнодорожную станцию Гомель, уничтожила более 30 вагонов с техникой и живой силой противника, взорвала склад с горючим. Погиб во время операции. ',
+                img: 'https://avatars.mds.yandex.net/i?id=cf890561ffc5c38054a1cb2eac99badd_l-5436735-images-thumbs&n=13'
+            },
+            'pedchenko': {
+                title: 'Улица Педченко',
+                text: 'Иван Григорьевич Педченко — участник освобождения Гомельщины от немецко-фашистских захватчиков в годы Великой Отечественной войны. <p style="text-indent: 20px;"> Окончил ФЗУ в Харькове, где с 1937 работал слесарем на заводе. <img src="https://rodmoy.ru/wp-content/uploads/2023/09/screenshot_2023-09-15-11-02-08-291_com-miui-gallery-2.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> В Красной Армии с 1941. На фронте с июня 1941. Участник обороны Одессы, Николаева, боёв за Кавказ, под Курском. В ноябре 1943 в составе отдельного понтонно-мостового батальона участвовал в освобождении Гомеля и области; за освобождение Гомельской области награждён орденом Отечественной войны I степени. Один из первых форсировал р. Сож. Понтонёры по пояс в ледяной воде наводили переправу, неся потери. Вскоре первый танк был переправлен на правый берег, здесь закрепилась небольшая группа бойцов, <img src="https://городгомель.бел/images/7/7d/Vid-petchenko-12.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> среди которых был И. Г. Педченко. В течение одного дня бойцы отбили 6 атак фашистов. Тяжело ранен в этом бою. Умер от ран. Похоронен в д. Сивинка Ветковского района в братской могиле советских воинов. ',
+                img: 'https://городгомель.бел/images/b/b1/Vid-petchenko%2C-10.jpg'
+            },
+            'landysheva': {
+                title: 'Улица Ландышева',
+                text: 'Ландышев Александр Алексеевич (1907 – 1943) – участник освобождения Беларуси от немецко-фашистских захватчиков в годы Великой Отечественной войны. <p style="text-indent: 20px;"> Родился в г. Барнаул. <img src="http://milglory.gomel.museum.by/files/node_images/mbjlxn1ep6e.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Окончил Гусевский стекольный техникум. С 1939 г. директор стеклозавода  «Красное Эхо» (Гусь- Хрустального района Владимирской области). <p style="text-indent: 20px;"> С августа 1941 г. на фронте. С октября 1943 командир батареи <img src="https://avatars.mds.yandex.net/get-altay/1923723/2a0000016fd06051883958034c9bb7111bd7/XXXL" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> артиллерийского полка, участвовавшего в освобождении Гомельщины. Огнём пушек Ландышева уничтожено до 100 гитлеровских солдат и офицеров, 4 миномета, несколько автомашин с живой силой противника. Погиб в бою в ноябре 1943 года. <p style="text-indent: 20px;"> Похоронен в д. Хальч Ветковского района Гомельской области в братской могиле советских воинов. ',
+                img: 'https://avatars.mds.yandex.net/i?id=5f3b551c04b8de70b60dc4769d878ef3_l-5339460-images-thumbs&n=13'
+            },
+            'telegin': {
+                title: 'Улица Телегина',
+                text: 'Телегин Константин Фёдорович (1899 – 1981) – советский военачальник, генерал-лейтенант, участник Великой Отечественной войны против немецко-фашистских захватчиков. <img src="https://waralbum.ru/wp-content/uploads/2021/03/of-19126_fg-1356_fotografiia_snimok_siuzhetnyi_v_shtabe_1-go_belorusskogo_fronta_komanduiushchii_frontom_rokossovskii_kk_sleva.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Родился Телегин в селе Татарское (ныне г. Татарск Новосибирской области). В Красной Армии с 1918. В 1931 г., после окончания Военно-политической академии им. В. И. Ленина – на руководящей работе в политорганах НКВД. Участник боёв на озере Хасан, советско-финляндской войны 1939-40 гг. <p style="text-indent: 20px;"> В 1942-1945 гг. член военных советов Донского, Центрального, Белорусского, 1-го Белорусского фронтов. Принимал участие в подготовке и осуществлении крупных стратегических <img src="https://russian7.ru/wp-content/uploads/2019/11/1-158.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> операций под Москвой, Сталинградом, Курском, при форсировании Днепра. При его участии разработан ряд операций по освобождению Беларуси. После войны, в 1945-1946 гг. – член Военного совета Группы советских войск и советской администрации в Германии. В июне 1947 г. Константина Федоровича обвинили в незаконных награждениях орденами и медалями ряда лиц, за что был переведён из членов ВКП(б) <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Iv_rokossovsky_fr.jpg/1600px-Iv_rokossovsky_fr.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> в кандидаты был уволен из армии и арестован. В июле 1953 г. полностью реабилитирован, восстановлен в Вооруженных силах. С 1955 начальник политотдела — заместитель начальника курсов «Выстрел» по политчасти. С 1956 г. в отставке. ',
+                img: 'https://photos.wikimapia.org/p/00/04/96/64/87_full.jpg'
+            },
+            'borodina': {
+                title: 'Улица Телегина',
+                text: 'Телегин Константин Фёдорович (1899 – 1981) – советский военачальник, генерал-лейтенант, участник Великой Отечественной войны против немецко-фашистских захватчиков. <img src="https://waralbum.ru/wp-content/uploads/2021/03/of-19126_fg-1356_fotografiia_snimok_siuzhetnyi_v_shtabe_1-go_belorusskogo_fronta_komanduiushchii_frontom_rokossovskii_kk_sleva.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Родился Телегин в селе Татарское (ныне г. Татарск Новосибирской области). В Красной Армии с 1918. В 1931 г., после окончания Военно-политической академии им. В. И. Ленина – на руководящей работе в политорганах НКВД. Участник боёв на озере Хасан, советско-финляндской войны 1939-40 гг. <p style="text-indent: 20px;"> В 1942-1945 гг. член военных советов Донского, Центрального, Белорусского, 1-го Белорусского фронтов. Принимал участие в подготовке и осуществлении крупных стратегических <img src="https://russian7.ru/wp-content/uploads/2019/11/1-158.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> операций под Москвой, Сталинградом, Курском, при форсировании Днепра. При его участии разработан ряд операций по освобождению Беларуси. После войны, в 1945-1946 гг. – член Военного совета Группы советских войск и советской администрации в Германии. В июне 1947 г. Константина Федоровича обвинили в незаконных награждениях орденами и медалями ряда лиц, за что был переведён из членов ВКП(б) <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Iv_rokossovsky_fr.jpg/1600px-Iv_rokossovsky_fr.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> в кандидаты был уволен из армии и арестован. В июле 1953 г. полностью реабилитирован, восстановлен в Вооруженных силах. С 1955 начальник политотдела — заместитель начальника курсов «Выстрел» по политчасти. С 1956 г. в отставке. ',
+                img: 'https://photos.wikimapia.org/p/00/04/96/64/87_full.jpg'
+            }
+        };
+
+        // Функция для открытия слайдера с данными
+        function openSlider(streetKey) {
+            const data = streetData[streetKey];
+            document.getElementById('slider-title').textContent = data.title;
+            document.getElementById('slider-text').innerHTML = data.text;
+            document.getElementById('slider-img').src = data.img;
+            document.getElementById('info-slider').classList.add('active');
+        }
+
+        // Закрытие слайдера
+        function closeSlider() {
+            document.getElementById('info-slider').classList.remove('active');
+        }
+
+        // Добавление обработчиков событий на все ссылки
+        document.getElementById('mazurova-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('mazurova');
+        });
+
+        document.getElementById('golovackogo-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('golovackogo');
+        });
+
+        document.getElementById('khataevicha-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('khataevicha');
+        });
+
+        document.getElementById('katunina-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('katunina');
+        });
+
+        document.getElementById('dokutovich-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('dokutovich');
+        });
+
+        document.getElementById('kozhara-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('kozhara');
+        });
+
+        document.getElementById('sviridova-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('sviridova');
+        });
+
+        document.getElementById('pedchenko-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('pedchenko');
+        });
+
+        document.getElementById('landysheva-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('landysheva');
+        });
+        document.getElementById('telegin-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('telegin');
+        });
+        document.getElementById('borodina-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('borodina');
+        });
+    </script>
+</body>
+</html>

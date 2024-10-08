@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cardsstyle.css">
+    <title>Выбор района</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div class="cards">
+        <h1>Выберите район</h1>
+        <div class="card card__one" id="central">
+            <div class="card__bg"></div>
+            <img class="card__img" src="" />
+            <div class="card__text">
+                <p class="card__title">Центральный район</p>
+            </div>
+        </div>
+        <div class="card card__two" id="soviet">
+            <div class="card__bg"></div>
+            <img class="card__img" src="" />
+            <div class="card__text">
+                <p class="card__title">Советский район</p>
+            </div>
+        </div>
+        <div class="card card__three" id="railway">
+            <div class="card__bg"></div>
+            <img class="card__img" src="" />
+            <div class="card__text">
+                <p class="card__title">Железнодорожный район</p>
+            </div>
+        </div>
+        <div class="card card__four" id="novobel" >
+            <div class="card__bg"></div>
+            <img class="card__img" src=""/>
+            <div class="card__text">
+                <p class="card__title">Новобелицкий район</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal" style="display: none;">
+      <div class="modal-content">
+         
+          <iframe src="../streetscarts/streetcards.html" width="1670px" height="1000px" style="border: none;"></iframe>
+      </div>
+  </div>
+  
+  <script src="cards.js"></script>
+  <script>
+      // Получаем элементы модального окна
+      var modal = document.getElementById("myModal");
+      var centralCard = document.getElementById("central");
+      var sovietCard = document.getElementById("soviet");
+      var railwayCard = document.getElementById("railway");
+      var novobelCard = document.getElementById("novobel");
+      var span = document.getElementsByClassName("close")[0];
+
+  </script>
+  
+</body>
+</html>

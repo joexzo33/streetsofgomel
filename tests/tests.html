@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест для закрпления знаний</title>
+    <link rel="stylesheet" href="tests.css">
+</head>
+<body>
+   <canvas id="bgCanvas"></canvas>
+    <div class="form-container">
+        <h1>Проверьте свои знания</h1>
+        
+        <form id="testForm">
+            <div class="question"> <!-- правильный ответ Катунин Илья Борисович -->
+                <p>1. В честь какого героя названа улица, который занимал должность заместителя командира эскадрильи 46-го штурмового авиационного полка Военно-воздушных сил Северного флота, капитан.</p>
+                <input type="radio" name="q1" value="Мазуров" id="mazurov1">
+                <label for="mazurov1">Кирилл Трофимович Мазуров</label><br>
+                <input type="radio" name="q1" value="Ефремов" id="efremov1">
+                <label for="efremov1">Ефремов Михаил Григорьевич</label><br>
+                <input type="radio" name="q1" value="Катунин" id="katunin1">
+                <label for="katunin1">Катунин Илья Борисович</label>
+            </div>
+
+            <div class="question"> <!-- правильный ответ Калеников Иван Емельянович -->
+                <p>2. В честь какого героя названа улица в Гомеле, которому был установлен памятник на кладбище Микеля в Риге?</p>
+                <input type="radio" name="q2" value="Калеников" id="kalenikov2">
+                <label for="kalenikov2">Калеников Иван Емельянович</label><br>
+                <input type="radio" name="q2" value="Пенязьков" id="penyazkov2">
+                <label for="penyazkov2">Пенязьков Дмитрий Никандрович</label><br>
+                <input type="radio" name="q2" value="Лизюков" id="lizukov2">
+                <label for="lizukov2">Евгений Ильич Лизюков</label>
+            </div>
+
+            <div class="question"> <!-- правильный ответ Емельян Игнатьевич Барыкин -->
+                <p>3. Как звали героя совесткого союза, который был избран первым секретарем Железнодорожного райкома партии, в марте 1941-го – секретарем Гомельского горкома?</p>
+                <input type="radio" name="q3" value="Карбышев" id="karbishev3">
+                <label for="karbishev3">Карбышев Дмитрий Михайлович</label><br>
+                <input type="radio" name="q3" value="Космодемьянская" id="kosmo3">
+                <label for="kosmo3">Зоя Анатольевна Космодемьянская</label><br>
+                <input type="radio" name="q3" value="Барыкин" id="barikin3">
+                <label for="barikin3">Емельян Игнатьевич Барыкин</label>
+            </div>
+
+            <!-- Остальные вопросы с уникальными ID -->
+            <div class="question"> <!-- правильный ответ Николай Францевич Гастелло -->
+                <p>4. Как звали героя совесткого союза в честь которого названа улица в г. Гомеле участвующего в битве на реке Халхин-Гол?</p>
+                <input type="radio" name="q4" value="Рокоссовский" id="rokossovsky4">
+                <label for="rokossovsky4">Константин Константинович Рокоссовский</label><br>
+                <input type="radio" name="q4" value="Гастелло" id="gastello4">
+                <label for="gastello4">Николай Францевич Гастелло</label><br>
+                <input type="radio" name="q4" value="Ридный" id="ridniy4">
+                <label for="ridniy4">Ридный Степан Григорьевич</label>
+            </div>
+
+            <div class="question"> <!-- правильный ответ Кожар Илья Павлович -->
+                <p>5. Один из организаторов и руководителей подполья и партизанского движения в Гомельской области в годы Великой Отечественной войны это?</p>
+                <input type="radio" name="q5" value="Оськин" id="oskin5">
+                <label for="oskin5">Виктор Семёнович Оськин</label><br>
+                <input type="radio" name="q5" value="Стрелец" id="strelec5">
+                <label for="strelec5">Стрелец Фёдор Михайлович</label><br>
+                <input type="radio" name="q5" value="Кожар" id="kozhar5">
+                <label for="kozhar5">Кожар Илья Павлович</label>
+            </div>
+
+            <!-- Пример с исправленным уникальным id для других вопросов -->
+            <div class="question"> <!-- правильный ответ Жуков Георгий Константинович -->
+                <p>6. Какой герой совесткого союза в честь которого была названа улица в г. Гомеле был назначен командующим войсками Киевского особого военного округа?</p>
+                <input type="radio" name="q6" value="Жуков" id="jukov6">
+                <label for="jukov6">Жуков Георгий Константинович</label><br>
+                <input type="radio" name="q6" value="Мележ" id="melezh6">
+                <label for="melezh6">Мележ Иван Павлович</label><br>
+                <input type="radio" name="q6" value="Пенязьков" id="penyazkov6">
+                <label for="penyazkov6">Пенязьков Дмитрий Никандрович</label>
+            </div>
+
+            <div class="question"> <!-- правильный ответ Склезнев Георгий Михайлович -->
+               <p>7. Какой герой Советского Союза в честь которого была названа улица в г. Гомеле был награжден орденом Легиона?</p>
+               <input type="radio" name="q7" value="Склезнев" id="skleznev7">
+               <label for="skleznev7">Георгий Михайлович Склезнев</label><br>
+               <input type="radio" name="q7" value="Серёгин" id="seregin7">
+               <label for="seregin7">Василий Серёгин</label><br>
+               <input type="radio" name="q7" value="Головачёв" id="golovachev7">
+               <label for="golovachev7">Головачёв Павел Яковлевич</label>
+           </div>
+
+           <div class="question"> <!-- правильный ответ Оськин Виктор Семёнович -->
+               <p>8. Какому герою Советского Союза в честь которого была названа улица в г. Гомеле 22 сентября 1992 года было посмертно присвоено звание Почетного гражданина г. Гомеля?</p>
+               <input type="radio" name="q8" value="Оськин" id="oskinn8">
+               <label for="oskinn8">Виктор Семёнович Оськин</label><br>
+               <input type="radio" name="q8" value="Кунцевич" id="kuncevich8">
+               <label for="kuncevich8">Кунцевич Николай Николаевич</label><br>
+               <input type="radio" name="q8" value="Хатаевич" id="hataevich8">
+               <label for="hataevich8">Хатаевич Мендэль Маркович</label>
+           </div>
+
+           <div class="question"> <!-- правильный ответ Хатаевич Мендэль Маркович -->
+               <p>9. Какая улица названа в честь героя, который был партийным и государственным деятелем и участником борьбы за власть Советов в Беларуси?</p>
+               <input type="radio" name="q9" value="Хатаевич" id="hataevich9">
+               <label for="hataevich9">Хатаевич Мендэль Маркович</label><br>
+               <input type="radio" name="q9" value="Дында" id="dinda9">
+               <label for="dinda9">Дында Ладислав</label><br>
+               <input type="radio" name="q9" value="Бельченко" id="belchenko9">
+               <label for="belchenko9">Пётр Саввич Бельченко</label>
+           </div>
+
+           <div class="question"> <!-- правильный ответ Каменщиков Владимир Григорьевич -->
+               <p>10. Как звали героя Советского Союза в честь которого была названа улица в г. Гомеле, который был командиром 38-го гвардейского истребительного авиационного полка ПВО 2-й гвардейской истребительной Сталинградской Краснознаменной авиадивизии ПВО?</p>
+               <input type="radio" name="q10" value="Гастелло" id="gastello10">
+               <label for="gastello10">Николай Францевич Гастелло</label><br>
+               <input type="radio" name="q10" value="Кунцевич" id="kuncevich10">
+               <label for="kuncevich10">Кунцевич Николай Николаевич</label><br>
+               <input type="radio" name="q10" value="Каменщиков" id="kamenshikov10">
+               <label for="kamenshikov10">Каменщиков Владимир Григорьевич</label>
+           </div>
+
+        
+
+           <div class="question"> <!-- правильный ответ Карастоянова Лилия Александровна -->
+               <p>11. Как звали героя Советского Союза в честь которого была названа улица г. Гомеля, который был советским журналистом и участником партизанского движения в годы Великой Отечественной войны на территории Беларуси?</p>
+               <input type="radio" name="q11" value="Телегин" id="telekin12">
+               <label for="telekin12">Телегин Константин Фёдорович</label><br>
+               <input type="radio" name="q11" value="Карастоянова" id="karostoyanova12">
+               <label for="karostoyanova12">Карастоянова Лилия Александровна</label><br>
+               <input type="radio" name="q11" value="Педченко" id="pedchenko12">
+               <label for="pedchenko12">Иван Григорьевич Педченко</label>
+           </div>
+
+           <div class="question"> <!-- правильный ответ Телегин Константин Федорович -->
+               <p>12. Какой герой Советского Союза в честь которого была названа улица г. Гомеля был советским военачальником и генералом-лейтенантом?</p>
+               <input type="radio" name="q12" value="Телегин" id="telekin2_13">
+               <label for="telekin2_13">Телегин Константин Фёдорович</label><br>
+               <input type="radio" name="q12" value="Карастоянова" id="karostoyanova2_13">
+               <label for="karostoyanova2_13">Карастоянова Лилия Александровна</label><br>
+               <input type="radio" name="q12" value="Стрелец" id="strelets13">
+               <label for="strelets13">Стрелец Фёдор Михайлович</label>
+           </div>
+
+           <div class="question"> <!-- правильный ответ Стрелец Фёдор Михайлович -->
+               <p>13. Как звали героя Советского Союза, который во время операции «Багратион» участвуя в боях за деревню Великое Лядо Рогачёвского района Гомельской области и д. Залитвинье Кировского района Могилёвской области, дополнительным пулемётным огнём отразил несколько контратак противника, нанеся ему значительный урон в живой силе?</p>
+               <input type="radio" name="q13" value="Гастелло" id="gastello14">
+               <label for="gastello14">Николай Францевич Гастелло</label><br>
+               <input type="radio" name="q13" value="Цариков" id="tsarikov14">
+               <label for="tsarikov14">Борис Андреевич Цариков</label><br>
+               <input type="radio" name="q13" value="Стрелец" id="strelets2_14">
+               <label for="strelets2_14">Стрелец Фёдор Михайлович</label>
+           </div>
+
+           <div class="question"> <!-- правильный ответ Карбышев Дмитрий Михайлович -->
+               <p>14. Как звали героя Советского Союза в честь которого была названа улица г. Гомеля, окончил Николаевскую военную инженерную академию?</p>
+               <input type="radio" name="q14" value="Карбышев" id="karbyshev15">
+               <label for="karbyshev15">Карбышев Дмитрий Михайлович</label><br>
+               <input type="radio" name="q14" value="Свиридов" id="sviridov15">
+               <label for="sviridov15">Свиридов Алексей Андреевич</label><br>
+               <input type="radio" name="q14" value="Жуков" id="zhukov15">
+               <label for="zhukov15">Жуков Георгий Константинович</label>
+           </div>
+        </form>
+
+        <button id="buttonsubn">Проверить ответы</button>
+    </div>
+
+    <script src="tests.js"></script>
+</body>
+</html>

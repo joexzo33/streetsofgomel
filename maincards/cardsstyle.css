@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@font-face {
+   font-family: 'Helvetica Neue Light';
+   src: url('../fonts/HelveticaNeueLight.otf') format('opentype');
+   font-weight: 300;
+   font-style: normal;
+}
+
+ html, body {
+	 height: 100%;
+}
+ body {
+	 align-items: center;
+	 display: flex;
+    font-family: 'Helvetica Neue Light', sans-serif;
+	 justify-content: center;
+	 overflow: hidden;
+	 text-align: center;
+    z-index: -1;
+}
+h1 {
+   font-size: 45px;
+   margin-left: 430px;
+   font-weight: 800;
+   letter-spacing: -1px;
+   margin-bottom: 30px;
+   transform: translateZ(35px);
+   background: linear-gradient(90deg, #e0e0e0, #b3b3b3, #ffffff, #b3b3b3, #e0e0e0);
+   background-clip: text;
+   -webkit-background-clip: text;
+   color: transparent; /* Цвет текста делаем прозрачным, чтобы был виден градиент */
+   transition: text-shadow 0.5s ease, background 0.5s ease; /* Переход для text-shadow и background */
+}
+
+/* Меняем цвет заголовка h1 при наведении на карточку */
+.cards:hover h1 {
+   text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5), /* Стандартная тень */
+   0 0 8px rgba(192, 192, 192, 0.5), /* Мягкое серебристое свечение */
+   0 0 12px rgba(192, 192, 192, 0.4); /* Ещё более мягкое свечение */
+   background: linear-gradient(90deg, #e0e0e0, #b3b3b3, #ffffff, #b3b3b3, #e0e0e0);
+   background-clip: text;
+   -webkit-background-clip: text;
+   color: transparent; /* Цвет текста делаем прозрачным, чтобы был виден градиент */
+}
+
+
+ h3 {
+	 color: #eb285d;
+	 font-size: 16px;
+	 margin-bottom: 6px;
+	 transform: translateZ(25px);
+}
+.cards {
+   z-index: 1;
+   position: absolute;
+   background: rgba(108, 150, 223, 0.3);
+   border-radius: 15px;
+   box-shadow: 0px 10px 20px 20px rgba(0, 0, 0, 0.17);
+   display: inline-block;
+   padding: 30px 35px;
+   text-align: left;
+   transform-origin: 50% 50%;
+   transform-style: preserve-3d;
+   transform: rotateX(11deg) rotateY(16.5deg);
+   min-width: 1300px;
+   margin-top: -250px;
+   margin-left: -680px;
+   height: 470px;
+   transition: box-shadow 0.5s ease, background-color 0.5s ease; /* Плавный переход для box-shadow и фона */
+   backdrop-filter: blur(10px); /* Эффект размытия фона */
+   border: 1px solid rgba(255, 255, 255, 0.5); /* Полупрозрачная рамка */
+}
+
+.cards:hover {
+   background: rgba(108, 150, 223, 0.3); /* Полупрозрачный цвет при наведении */
+   backdrop-filter: blur(10px); /* Эффект размытия фона при наведении */
+   box-shadow: 0px 10px 25px 15px rgba(108, 150, 223, 0.4); /* Мягкая тень для подсветки */
+}
+
+.card {
+   border-radius: 15px;
+   box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.6);
+   display: inline-block;
+   height: 370px;
+   margin-left: 42px;
+   overflow: hidden;
+   perspective: 1200px;
+   position: relative;
+   transform-style: preserve-3d;
+   transform: translatez(35px);
+   transition: transform 300ms ease-out, box-shadow 300ms ease-out, background-color 300ms ease-out; 
+   width: 250px;
+   text-align: center;
+   z-index: 1;
+}
+
+.card:hover {
+   transform: translatez(35px) scale(1.1); 
+   box-shadow: 0 0 25px rgba(142, 212, 255, 0.879);
+   background-color: rgba(255, 204, 0, 0.1); 
+}
+
+.card__title {
+   text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5); 
+   
+   background: linear-gradient(90deg, #e0e0e0, #b3b3b3, #ffffff, #b3b3b3, #e0e0e0);
+   background-clip: text;
+   -webkit-background-clip: text;
+   color: transparent; 
+   transition: transform 0.4s ease, text-shadow 0.4s ease; 
+}
+
+.card:hover .card__title {
+   transform: scale(1.1); 
+   text-shadow: 3px 3px 15px rgba(192, 192, 192, 0.7), 
+                0 0 10px rgba(192, 192, 192, 0.5); 
+   /* Имитация хромированного текста */
+   background: linear-gradient(90deg, #e0e0e0, #b3b3b3, #ffffff, #b3b3b3, #e0e0e0);
+   background-clip: text;
+   -webkit-background-clip: text;
+   color: transparent; 
+}
+
+
+
+
+
+.card:hover .card__bg {
+   background-color: rgba(0, 0, 0, 0.5); 
+   transition: background-color 300ms ease-out; 
+}
+
+
+ .card:not(:last-child) {
+	 margin-right: 30px;
+}
+ .card__img {
+	 position: relative;
+	 height: 100%;
+}
+ .card__bg {
+	 bottom: -50px;
+	 left: -50px;
+	 position: absolute;
+	 right: -50px;
+	 top: -50px;
+	 transform-origin: 50% 50%;
+	 transform: translateZ(-50px);
+	 z-index: 0;
+}
+ .card__one .card__img {
+	 top: 14px;
+	 right: -10px;
+	 height: 110%;
+}
+ .card__one .card__bg {
+	 background: url('https://s9.travelask.ru/system/images/files/001/144/697/wysiwyg_jpg/0_ccbd2_1a186a77_orig.jpg?1536406032') center / cover no-repeat;
+}
+ .card__two .card__img {
+	 top: 25px;
+}
+ .card__two .card__bg {
+	 background: url('https://ic.pics.livejournal.com/anonimusi/67966348/7522382/7522382_original.jpg') center / cover no-repeat;
+}
+ .card__three .card__img {
+	 top: 5px;
+	 left: -4px;
+	 height: 110%;
+}
+ .card__three .card__bg {
+	 background: url('https://planetabelarus.by/upload/resize_cache/iblock/0c2/1330_747_18e21fe612b4afb807a26ecc22279a1d9/0c27d08208b31120970788bb30663eda.jpg') center / cover no-repeat;
+}
+
+.card__four .card__bg {
+   background: url('https://fs3.fotoload.ru/f/0621/1624203412/1920x1080/0cf61eda91.jpg') center / cover no-repeat;
+}
+ .card__text {
+	 align-items: center;
+	 background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 100%);
+	 bottom: 0;
+	 display: flex;
+	 flex-direction: column;
+	 height: 70px;
+	 justify-content: center;
+	 position: absolute;
+	 width: 100%;
+	 z-index: 2;
+}
+.card__title {
+   text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5); /* Добавление тени */
+   /* Имитация хромированного текста */
+  background: linear-gradient(90deg, #e0e0e0, #b3b3b3, #ffffff, #b3b3b3, #e0e0e0);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent; /* Цвет текста делаем прозрачным, чтобы был виден градиент */
+   font-size: 24px;
+   font-weight: 700;
+   padding: 0 10px;
+   margin-bottom: 3px;
+   font-family: 'Helvetica Neue Light', sans-serif;
+   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Добавляем тень к тексту */
+}
+
+ .notice {
+	 background: gold;
+	 border-top-left-radius: 6px;
+	 bottom: 0;
+	 font-family: 'Helvetica Neue Light', sans-serif;
+	 font-size: 14px;
+	 padding: 8px 10px;
+	 position: absolute;
+	 right: -20px;
+}
+ .twitter__link {
+	 cursor: pointer;
+	 position: absolute;
+	 right: -10px;
+	 top: 12px;
+	 z-index: -1;
+	 background: #00aced;
+	 border-radius: 20px;
+	 height: 30px;
+	 text-decoration: none;
+	 padding-right: 10px;
+	 justify-content: space-between;
+	 font-weight: 600;
+	 display: flex;
+	 align-items: center;
+	 color: #fff;
+	 font-size: 14px;
+	 width: 74px;
+	 opacity: 0.4;
+}
+ .twitter__link:hover {
+	 opacity: 1;
+}
+ .twitter__icon {
+	 height: 30px;
+}
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; /* Убедитесь, что высота 100% */
+    overflow: hidden; /* Убираем прокрутку */
+}
+
+.modal-content {
+	margin-top: -30px;
+	margin-left: 260px;
+	width: 1300px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black; /* Изменение цвета при наведении */
+    text-decoration: none; /* Убираем подчеркивание */
+}
+
+.modal-content p {
+    margin: 0; /* Убираем отступы у параграфов */
+}
+
+
+
+

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="streetcardszhelezo.css">
+    <title>Карточка Железнодорожного района</title>
+    <style>
+           #info-slider {
+  position: fixed;
+  top: 0;
+  right: -1000px;
+  width: 650px;
+  height: 100%;
+  max-height: 100vh; /* Ограничиваем высоту слайдера размером экрана */
+  box-sizing: border-box; /* Включаем padding в расчеты ширины и высоты */
+  background: rgba(108, 150, 223, 0.3);
+  backdrop-filter: blur(10px); /* Эффект размытия фона */
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Полупрозрачная рамка */
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px 20px rgba(0, 0, 0, 0.17);
+  box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+  box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+  transition: right 0.5s ease;
+  padding: 40px 30px 40px 0px; /* Паддинг сверху, справа и снизу */
+  z-index: 1000;
+  overflow-y: auto; /* Вертикальный скролл при переполнении */
+  overflow-x: hidden; /* Отключаем горизонтальный скролл */
+}
+
+        #info-slider.active {
+            right: 0;
+        }
+
+        #info-slider h2 {
+            margin-top: 0;
+        }
+
+        #info-slider img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .close-slider {
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="profile-card js-profile-card">
+            <div class="profile-card__img">
+                <img src="https://gp.by/upload/medialibrary/c2c/c2c81bb24440c5e834046dea73f6b9c7.JPG" alt="profile card">
+            </div>
+
+            <div class="profile-card__cnt js-profile-cnt">
+                <div class="profile-card__name">Железнодорожный район</div>
+                <div class="profile-card__txt">Население: 80 000<strong> человек</strong></div>
+                <div class="profile-card-loc">
+                    <span class="profile-card-loc__icon">
+                        <svg class="icon"><use xlink:href="#icon-location"></use></svg>
+                    </span>
+                    <span class="profile-card-loc__txt">Гомель, Беларусь</span>
+                </div>
+
+                <div class="profile-card-inf">
+                    <div class="profile-card-inf__item">
+                        <a href="#" id="belchenko-link" class="profile-card-inf__title">ул. Бельченко</a>
+                        <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                    </div>
+
+                    <div class="profile-card-inf__item">
+                      <a href="#" id="carikov-link" class="profile-card-inf__title">ул. Царикова</a>
+                      <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                  </div>
+
+                    <div class="profile-card-inf__item">
+                        <a href="#" id="dinda-link" class="profile-card-inf__title">ул. Дынды</a>
+                        <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                    </div>
+                    <div class="profile-card-inf__item">
+                      <a href="#" id="efremova-link" class="profile-card-inf__title">ул. Ефремова</a>
+                      <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                  </div>
+                  <div class="profile-card-inf__item">
+                    <a href="#" id="gastelo-link" class="profile-card-inf__title">ул. Гастелло</a>
+                    <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+                </div>
+                <div class="profile-card-inf__item">
+                  <a href="#" id="kamen-link" class="profile-card-inf__title">ул. Каменщикова</a>
+                  <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+              </div>
+              <div class="profile-card-inf__item">
+               <a href="#" id="kara-link" class="profile-card-inf__title">ул. Карастояновой</a>
+               <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+           </div>
+           <div class="profile-card-inf__item">
+            <a href="#" id="kuncevich-link" class="profile-card-inf__title">ул. Кунцевича</a>
+            <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+        </div>
+        <div class="profile-card-inf__item">
+         <a href="#" id="ridnogo-link" class="profile-card-inf__title">ул. Ридного</a>
+         <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+     </div>
+     <div class="profile-card-inf__item">
+      <a href="#" id="strelec-link" class="profile-card-inf__title">ул. Стрельца</a>
+      <div class="profile-card-inf__txt">Нажмите для просмотра</div>
+  </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайдер с информацией -->
+        <div id="info-slider">
+            <span class="close-slider" onclick="closeSlider()">&times;</span>
+            <img id="slider-img" src="" alt="Улица фото">
+            <h2 id="slider-title"></h2>
+            <p id="slider-text"></p>
+        </div>
+    </div>
+
+    <svg hidden="hidden">
+        <defs>
+            <symbol id="icon-instagram" viewBox="0 0 32 32">
+                <title>instagram</title>
+                <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.838-0.219-0.563-0.481-1.412-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.637-1.281 1.194-1.837 0.563-0.563 1.094-0.906 1.837-1.2 0.563-0.219 1.413-0.481 2.969-0.55z"/>
+            </symbol>
+        </defs>
+    </svg>
+
+    <script>
+        // Данные по улицам
+        const streetData = {
+            'belchenko': {
+                title: 'Улица Бельченко',
+                text: 'Пётр Саввич Бельченко — участник партизанского движения на территории Белоруссии в годы Великой Отечественной войны, инженер-капитан. <p style="text-indent: 20px;"> В 1925 году закончил семилетку, потом трехлетнюю сельхозпрофшколу и получил специальность агронома. Окончил Харьковский институт механизации <img src="https://shieldandsword.mozohin.ru/VD3462/mvd5354/personnel/belchenko_s_s.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> сельского хозяйства (1939), работал инженером-механиком, сотрудником Днепропетровской ГАИ. <p style="text-indent: 20px;"> С 1941 в Красной Армии. В июне — ноябре 1942 сотрудник оперативно-чекистской группы НКВД БССР по Гомельской области. С ноября 1942 в Белорусском штабе партизанского движения. <p style="text-indent: 20px;"> 1943 год. Пётр Бельченко по-прежнему в разведотделе Белорусского штаба. <img src="https://partizany.by/upload/resize_cache/slam.image/uf/b25/557_841_1/b254f692e9156f716089ab8d8be69c7e.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Он участвует в подготовке отличной операции по совместным действиям воинов Белорусского фронта и партизан Гомельского и Полесского соединений, которая привела к освобождению нашего города. <p style="text-indent: 20px;"> В Гомель Пётр Бельченко вошел как воин-освободитель, как партизан-разведчик. <p style="text-indent: 20px;"> Весной 1944 года Пётр Савич направляется за линию фронта во главе специальной группы для установления связи с действующими партизанскими бригадами. Тяжёлый и опасный это был поход. В районе деревни Ракитно Ровенской области Пётр Савич Бельченко  во время боя с гитлеровскими наемниками — бандой украинских националистов погиб смертью храбрых. Это было 28 апреля 1944 года.',
+                img: 'https://avatars.mds.yandex.net/get-altay/1583613/2a0000016efb043ac2302e4c380861cbe65c/XXXL' 
+            },
+            'efremova': {
+                title: 'Улица Ефремова',
+                text: 'Ефремов Михаил Григорьевич (1897 – 1942) – советский военачальник, Герой Российской Федерации (1996), генерал-лейтенант. <p style="text-indent: 20px;"> Родился в г. Таруса Калужской губернии (ныне Калужской области). В ноябре 1915 года Михаил Ефремов был призван в Русскую императорскую армию. В Красной Армии с 1918 года. <img src="http://milglory.gomel.museum.by/files/node_images/efremov_m.t.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> В 1922 году окончил Военно-академические курсы высшего комсостава, в 1928 году – Курсы усовершенствования высшего начальствующего состава при Военной академии РККА им. М.В. Фрунзе, в 1933 году – Военную академию РККА им. М.В. Фрунзе. <p style="text-indent: 20px;"> В начале Великой Отечественной войны генерал-лейтенант Ефремов воевал в должности командующего 21-й армией Западного фронта, которая вела бои на могилевском направлении. <img src="http://milglory.gomel.museum.by/files/node_images/pt-efremova-4_0.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> 7 августа 1941 г. он назначен командующим войсками Центрального фронта, затем формировавшейся 10-й армией на Южном фронте (сентябрь – октябрь 1941), с октября 1941 г. – командующим 33-й армией Западного фронта. <p style="text-indent: 20px;"> В январе 1942 года оказался с частью сил 33-й армии в окружении. <img src="https://static.tildacdn.info/tild6137-3138-4761-a234-323936336437/13.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> При попытке прорыва из окружения, 19 апреля 1942 года, в бою около д. Жары Вяземского района Смоленской области был тяжело ранен и, не желая попасть в плен, застрелился. <p style="text-indent: 20px;"> Испытывая уважение к отважному генералу, немцы похоронили его с воинскими почестями в селе Слободка, а после освобождения этих мест со-ветскими войсками его прах был перезахоронен в г. Вязьме. Именем Ефремова Михаила Григорьевича в г. Гомеле названа улица.',
+                img: 'https://avatars.mds.yandex.net/i?id=22e921b5de21d398c823b8aee6f78ca9_l-5251856-images-thumbs&n=13' // Добавьте изображение
+            },
+            'carikov': {
+                title: 'Улица Царикова',
+                text: 'Борис Андреевич Цариков родился 31 октября 1925 г. в Гомеле. В конце сентября 1941 года семья Цариковых переехала в Ртищево Саратовской области, где в декабре 1941 Борис, увеличив себе возраст на один год, вступил в ряды вооруженных сил СССР. В марте 1942 г. у д. Плоты Цариков получил боевое крещение, летом 1942 г. провёл несколько диверсий на железной дороге. 7 октября 1942 г. Цариков был награжден орденом Красного Знамени. <img src="http://milglory.gomel.museum.by/files/node_images/carikov_ba.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> В октябре 1942 года Борис был направлен в 43-й Даурский стрелковый полк 106-й дивизии. Служить ему выпало во взводе разведки, и вместе со своими боевыми товарищами он сражался Курской дуге. <p style="text-indent: 20px;"> После тяжелых боев на Десне, в районе города Новгород-Северский, перед командованием 65-й армии была поставлена задача - готовиться к форсированию Днепра в районе Лоева. Операция предстояла сложная: у Лоева. где Сож вливается в Днепр, река достигает большой ширины, к тому же с высокого правого берега удобно было держать под огнем равнинное левобережье. В кратчайший срок части подготовились к форсированию и вышли на исходные рубежи. В состав штурмового батальона 43-го полка вошел и Борис Цариков. 15 октября 1943 года Борис Цариков с группой минёров первым переправился через реку Днепр в районе Лоева Гомельской области, <img src="https://sun9-72.userapi.com/impg/HfdLv6AdScGFf5XJjfDrmYXA9GHeAAimDgJVyg/JMTOE7Jwlj8.jpg?size=990x1080&quality=96&sign=d901fc529437b9720ace8f5a45287629&c_uniq_tag=0-pCLrcUqN4yi_MhU6361ae_bSk4aJImtzVfx_CGepk&type=album" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> водрузив на правом берегу Красное Знамя, и в течение 5 суток участвовал в боях по расширению плацдарма. <p style="text-indent: 20px;"> Указом Президиума Верховного Совета СССР от 30 октября 1943 года за образцовое выполнение боевых заданий командования и проявленные при этом геройство и мужество Борису Андреевичу Царикову было присвоено звание Героя Советского Союза. Погиб герой 13 ноября 1943 года. Похоронен в братской могиле в г.п. Лоев. Именем Бориса Царикова названы улицы в г.Гомеле и г.п. Лоев, его имя носит СШ №25 г. Гомеля.',
+                img: 'https://avatars.mds.yandex.net/i?id=9b7ff92ba23cf60618c8129665ca54b7_l-5229803-images-thumbs&n=13' // Добавьте изображение
+            },
+            'dinda': {
+                title: 'Улица Дынды',
+                text: 'Дында Ладислав (1916-1943) – участник партизанского движения на территории Гомельской области в годы Великой Отечественной войны. Воин-интернационалист. <p style="text-indent: 20px;"> Родился 9 января <img src="http://milglory.gomel.museum.by/files/node_images/cuztoqwkm18_0.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> в д. Штоле (Словакия). Окончил гимназию в г. Кежмарок, ветеринарный институт в г. Брно (Чешская Республика). В ноябре 1942 г. призван в немецкую армию, служил в словацком полку, который дислоцировался на территории Гомельской области. В конце января 1943 г. перешёл в гомельский партизанский отряд «Большевик», предупредив о предстоящей операции гитлеровцев, что дало возможность партизанам изменить место дислокации, не понеся потерь. <img src="http://milglory.gomel.museum.by/files/node_images/enn8ivjxe_m_0.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Он был отправлен в одну из диверсионных групп, где принимал участие в боевых операциях, в том числе в подрыве 5 вражеских эшелонов. <p style="text-indent: 20px;"> Схвачен на железнодорожной станции Буда-Кошелёвская при выполнении боевого задания, после пыток повешен. Похоронен в Буда-Кошелёве в братской могиле. Одна из улиц г. Гомеля названа в честь Ладислава Дынды.',
+                img: 'http://photos.wikimapia.org/p/00/06/35/97/88_full.jpg' // Добавьте изображение
+            },
+            'gastelo': {
+                title: 'Улица Гастелло',
+                text: 'Николай Францевич Гастелло (1907 – 1941) – советский военный лётчик, Герой Советского Союза, капитан. Родился в г. Москве. Окончил семилетнюю школу №25 им. Пушкина в Москве. С 1930 г. работал слесарем и нормировщиком на Государственном механическом заводе строительных машин им. Первого Мая. <p style="text-indent: 20px;"> С мая 1932 г. – в Красной Армии, по специальному <img src="http://milglory.gomel.museum.by/files/node_images/bj7d16tzk84.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> набору был призван в ВВС. В 1933 г. окончил 11-ю Луганскую военную авиационную школу лётчиков им. Пролетариата Донбасса. В 1934-1938 гг. служил в 82-й тяжелобомбардировочной авиационной эскадрилье, затем в бомбардировочной авиационной бригаде в Ростове-на-Дону. С мая 1938 г. командовал отрядом в 1-м тяжелобомбардировочном авиационном полку. <p style="text-indent: 20px;"> Участник битвы на реке Халхин-Гол,  советско-финляндской войны 1939-1940 гг., Великой Отечественной войны. <p style="text-indent: 20px;"> 26 июня 1941 г. выполняя боевое задание, его бомбардировщик ДБ-3ф был повреждён артиллерийским снарядом. Охваченную пламенем машину <img src="http://milglory.gomel.museum.by/files/node_images/ihepbg4omhi_0.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:150px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Гастелло и члены экипажа (А. А. Бурденюк, Г. Н. Скоробогатый и А. А. Калинин) направили на моторизованную колонну вражеских войск на шоссе Молодечно – Радошковичи и ценой своей жизни нанесли противнику значительный урон. В г. Гомеле его именем названа улица.',
+                img: 'https://avatars.mds.yandex.net/i?id=227095edf01bf963e591f1bec597e63d_l-9294167-images-thumbs&n=13' // Добавьте изображение
+            },
+            'kamen': {
+                title: 'Улица Каменщикова',
+                text: 'Каменщиков Владимир Григорьевич (1915 – 1943) – Герой Советского Союза (1941), участник боёв против немецко-фашистских захватчиков на территории Беларуси в годы Великой Отечественной войны. <p style="text-indent: 20px;"> Родился в г. Царицыне (Волгоград). В 1934 г. окончил военно-строительный техникум, а в 1937 г. – Сталинградскую военную школу лётчиков, <img src="http://milglory.gomel.museum.by/files/node_images/hzxjebk6kdc.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> по окончании которой был направлен в Гомель в 14 штурмовой авиаполк, базировавшийся на аэродроме Зябровка. Вскоре он был переведён в 126-й истребительный авиаполк. <p style="text-indent: 20px;"> В.Г. Каменщиков особо отличился при оборонительных боях в районе Белостока. 22.06. 1941 г. вступил в бой с 3-мя самолётами противника и один из них сбил. 26.06. 1941 г. сбил 4 вражеских самолёта. Воевал на Западном, Северо-Западном, Сталинградском и Юго-Западном фронтах. <p style="text-indent: 20px;"> В феврале 1943 г. назначен командиром 38-го гвардейского истребительного авиационного полка ПВО 2-й гвардейской истребительной Сталинградской Краснознаменной авиадивизии ПВО. Каменщиков участник обороны Москвы, Сталинграда. <p style="text-indent: 20px;"> 22 мая 1943 г. в районе города <img src="http://milglory.gomel.museum.by/files/node_images/xwulzpsv2ta_0.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Белая Калитва (Россия) гвардии майор Каменщиков погиб в катастрофе. Похоронен в Волгограде на площади Павших борцов. Именем Владимира Григорьевича в г. Гомеле названа улица.',
+                img: 'http://photos.wikimapia.org/p/00/06/36/88/91_full.jpg' // Добавьте изображение
+            },
+            'kara': {
+                title: 'Улица Карастояновой',
+                text: 'Карастоянова Лилия Александровна (1917 – 1943) – советская журналистка, участник партизанского движения в годы Великой Отечественной войны на территории Беларуси. Родилась в г. Лом в Болгарии в семье революционеров. В сентябре 1923 года за участие в восстании был убит отец Лилии, мать вместе с детьми была брошена в тюрьму. <p style="text-indent: 20px;"> В 1927 году вместе с семьёй она была переправлена в СССР. <img src="http://milglory.gomel.museum.by/files/node_images/artgrnvp9rc.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> С 1938 г. Карастоянова работала корреспондентом газеты «Комсомольская правда»: участвовала в работе выездной редакции, писала свои первые заметки. <p style="text-indent: 20px;"> В начальный период Великой Отечественной войны Лилия работала в Вологде в редакции газеты «Все для города Ленина!». Летом 1942 г. она возвращается в Москву. <p style="text-indent: 20px;">  После подготовки в составе организаторской группы НКВД <img src="https://avatars.dzeninfra.ru/get-zen_doc/62917/pub_5fae8b9b70f5da1bda12c6be_5faed8c11064d30b6cabe64f/scale_1200" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> отправляется за линию фронта в партизанский отряд (позднее, соединение) А.Ф. Фёдорова. В составе отряда участвовала во множестве диверсий на территории Брянской и Гомельской областей, работала в редакции подпольной газеты «Большевик». <p style="text-indent: 20px;"> Погибла 6 февраля 1943 г. в бою с немецкими войсками близ деревни Будище Чечерского района Гомельской области. Похоронена в братской могиле в г. Чечерске. Именем Л.А. Карастояновой названа одна из улиц г. Гомеля.',
+                img: 'http://photos.wikimapia.org/p/00/05/49/21/44_full.jpg' // Добавьте изображение
+            },
+            'kuncevich': {
+                title: 'Улица Кунцевича',
+                text: 'Кунцевич Николай Николаевич (1906 –1941) – участник боёв против немецко-фашистских захватчиков в годы Великой Отечественной войны на территории Беларуси. <p style="text-indent: 20px;"> Родился в г. Барановичи. С 1910 г. вместе с семьей обосновался в г. Гомеле. После окончания техникума железнодорожного транспорта в 1927 г. <img src="http://milglory.gomel.museum.by/files/node_images/tppii66l8t4_0.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> преподавал в нём, а в 1936 г. занял пост директора. <p style="text-indent: 20px;"> С начала Великой Отечественной войны Николай Николаевич – комиссар 2-го батальона Гомельского полка народного ополчения. Кунцевич проводил большую политико-воспитательную работу среди бойцов и командиров. Ополченцы вместе с частями Красной Армии мужественно обороняли город. 18 августа 1941 г. батальон во главе с Николаем Николаевичем <img src="http://milglory.gomel.museum.by/files/styles/medium/public/node_images/-p4wocmrfnm_0.jpg?itok=rcr9gNQY" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> отбил 2 атаки врага, во время одной из которых комиссар вырвался вперёд и с возгласом «За Родину! За нашу Победу!» увлёк бойцов в контратаку. Погиб в этом бою. Похоронен в Гомеле в братской могиле гомельских ополченцев в Комсомольском сквере. Именем Николая Николаевича Кунцевича в г. Гомеле названа улица. На фасаде Гомельского государственного колледжа железнодорожного транспорта (ул. Советская, 59) установлена мемориальная доска.',
+                img: 'https://ggkjt.bsut.by/wp-content/uploads/2020/11/5C_4ISq8kNo-960x600.jpg' // Добавьте изображение
+            },
+            'ridnogo': {
+                title: 'Улица Ридного',
+                text: 'Ридный Степан Григорьевич – командир звена 126-го истребительного авиационного полка Войск противовоздушной обороны страны, старший лейтенант, Герой Советского Союза. <p style="text-indent: 20px;"> Родился в с. Малая Рыбица Краснопольского района Сумской области. Окончил Богодуховскую зоошколу (1935), Одесскую школу военный лётчиков (1938). В Красной Армии с 1937 г. <p style="text-indent: 20px;"> Проходил службу в Смоленске, Витебске, а с января 1940 в г. Гомеле. Участник Великой Отечественной войны с июня 1941 г. <img src="http://milglory.gomel.museum.by/files/node_images/hd8cbu-xy1i.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> Командир звена 126-го истребительного авиационного полка младший лейтенант Степан Ридный ежедневно совершал по 6-8 боевых вылетов на сопровождение бомбардировщиков и перехват самолётов противника, а также штурмовку войск и техники. С 10 по 12.07. 1941 в составе группы сбил 4 самолёта противника. <p style="text-indent: 20px;"> 9 февраля 1942 года старший лейтенант С. Г. Ридный погиб в авиакатастрофе. Похоронен на кладбище около станции Чкаловская (в черте г. Щёлково) Московской области. Именем С.Г. Ридного названа одна из улиц г. Гомеля.',
+                img: 'https://avatars.mds.yandex.net/i?id=2c58ea78925400a26bbfde94db600d5c_l-5150820-images-thumbs&n=13' // Добавьте изображение
+            },
+            'strelec': {
+                title: 'Улица Стрельца',
+                text: 'Стрелец Фёдор Михайлович (1910 – 1944) – участник Великой Отечественной войны, Герой Советского Союза (посмертно), рядовой. <p style="text-indent: 20px;"> Родился 1 октября 1910 г. в с. Наумовка (Корюковского района Черниговской области). Работал лесорубом в лесничестве. В 1930-е г. жил в д. Старая Мильча Гомельского района (ныне в черте Гомеля). В 1932 г. призван в ряды Красной Армии. <img src="http://milglory.gomel.museum.by/files/node_images/bez_imeni-1_7.jpg" alt="Дополнительная картинка" style="float: right; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);"> В 1933 г. демобилизовался, вторично призван в действующую армию в декабре 1943 г. Воевал на 1-м Белорусском фронте. <p style="text-indent: 20px;"> Во время операции «Багратион», 24-30 июня 1944 г. стрелок 1090-го стрелкового полка красноармеец Ф. М. Стрелец, участвуя в боях за д. Великое Лядо Рогачёвского района Гомельской области и д. Залитвинье Кировского района Могилёвской области,  <img src="http://milglory.gomel.museum.by/files/node_images/7_208.jpg" alt="Дополнительная картинка" style="float: left; margin: 10px; width:240px; border-radius: 15px; border: 1px solid rgba(171, 207, 248, 0.5);">пулемётным огнём отразил несколько контратак противника, нанеся ему значительный урон в живой силе. 26 июня 1944 г. в бою отразил вражескую контратаку, гранатами уничтожил 10 гитлеровцев, первым поднялся в атаку и увлёк за собой бойцов роты. 30 июня 1944 г. с помощью огневой мощи отбил более 10 вражеских контратак. Погиб в этом бою. В г. Гомеле именем Фёдора Михайловича Стрельца названа улица.',
+                img: 'https://avatars.mds.yandex.net/get-altay/1870294/2a0000016ee41789fca6088d905efe69ebf9/XXL_height' // Добавьте изображение
+            }
+        };
+
+        // Функция для открытия слайдера
+        function openSlider(street) {
+            const data = streetData[street];
+            document.getElementById('slider-title').innerText = data.title;
+            document.getElementById('slider-text').innerHTML = data.text;
+            document.getElementById('slider-img').src = data.img;
+            document.getElementById('info-slider').classList.add('active');
+        }
+
+        // Функция для закрытия слайдера
+        function closeSlider() {
+            document.getElementById('info-slider').classList.remove('active');
+        }
+
+        // Назначение обработчиков кликов для всех ссылок
+        document.getElementById('belchenko-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('belchenko');
+        });
+
+        document.getElementById('efremova-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('efremova');
+        });
+
+        document.getElementById('carikov-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('carikov');
+        });
+
+        document.getElementById('dinda-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('dinda');
+        });
+
+        document.getElementById('gastelo-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('gastelo');
+        });
+
+        document.getElementById('kamen-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('kamen');
+        });
+
+        document.getElementById('kara-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('kara');
+        });
+
+        document.getElementById('kuncevich-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('kuncevich');
+        });
+
+        document.getElementById('ridnogo-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('ridnogo');
+        });
+
+        document.getElementById('strelec-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            openSlider('strelec');
+        });
+    </script>
+</body>
+</html>
