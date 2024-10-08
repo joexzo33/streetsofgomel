@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <title>Знаковые личности города Гомеля</title>
+</head>
+<body>
+   <canvas id="bgCanvas"></canvas>
+   <div class="context">
+      <h1>Улицы Гомеля носят имена этих людей</h1>
+   </div>
+   <a href="../tests/tests.html" class="testsaddress">Пройти тест</a>
+
+   
+   
+   <canvas id="bgCanvas"></canvas>
+   <div id="card-container"></div>
+    
+   <div id="myModalSoviet" class="modal">
+      <div class="modal-content">
+         <span class="close">&times;</span> <!-- Кнопка закрытия -->
+         <iframe src="../streetscartssoviet/streetcardssoviet.html" width="1670px" height="1000px" style="border: none;"></iframe>
+      </div>
+   </div>
+   
+   <div id="myModal" class="modal">
+      <div class="modal-content">
+         <span class="close">&times;</span> <!-- Кнопка закрытия -->
+         <iframe src="../streetscarts/streetcards.html" width="1670px" height="1000px" style="border: none;"></iframe>
+      </div>
+   </div>
+   
+   <div id="myModalNovobel" class="modal">
+      <div class="modal-content">
+         <span class="close">&times;</span> <!-- Кнопка закрытия -->
+         <iframe src="../streetscartsbelica/streetcardsbelica.html" width="1670px" height="1000px" style="border: none;"></iframe>
+      </div>
+   </div>
+   
+   <div id="myModalRailway" class="modal">
+      <div class="modal-content">
+         <span class="close">&times;</span> <!-- Кнопка закрытия -->
+         <iframe src="../streetscartszhelezo/streetcardszhelezo.html" width="1670px" height="1000px" style="border: none;"></iframe>
+      </div>
+   </div>
+  
+
+   <script src="script.js"></script>
+   <script>
+      // Загружаем внешний HTML с карточками
+      fetch('../maincards/cards.html') // Путь к файлу cards.html
+         .then(response => response.text())
+         .then(data => {
+            const cardContainer = document.getElementById('card-container');
+            
+            // Удаляем существующие карточки, если они есть
+            cardContainer.innerHTML = ''; // Это удалит все текущие карточки
+
+            // Добавляем новые карточки
+            cardContainer.innerHTML = data;
+
+            // Подключаем стили
+            let link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = '../maincards/cardsstyle.css'; // Путь к стилям
+            document.head.appendChild(link);
+
+            // Подключаем скрипт после того, как HTML загружен
+            let script = document.createElement('script');
+            script.src = '../maincards/cards.js'; // Путь к JS
+            script.onload = () => {
+               // Добавляем обработчики для карточек только после загрузки скрипта
+               setupModalHandlers();
+            };
+            document.body.appendChild(script);
+         })
+         .catch(error => console.error('Ошибка загрузки карточек:', error));
+
+      function setupModalHandlers() {
+         const novobelCard = document.getElementById('novobel');
+         if (novobelCard) {
+            novobelCard.onclick = function() {
+               document.getElementById('myModalNovobel').style.display = 'block';
+            };
+         }
+         // Добавляем обработчики событий для открытия модальных окон
+         const centralCard = document.getElementById('central');
+         if (centralCard) {
+            centralCard.onclick = function() {
+               document.getElementById('myModal').style.display = 'block';
+            };
+         }
+         const sovietCard = document.getElementById('soviet');
+         if (sovietCard) {
+            sovietCard.onclick = function() {
+               document.getElementById('myModalSoviet').style.display = 'block';
+            };
+         }
+
+         const railwayCard = document.getElementById('railway');
+         if (railwayCard) {
+            railwayCard.onclick = function() {
+               document.getElementById('myModalRailway').style.display = 'block';
+            };
+         }
+
+         // Закрытие модальных окон при клике вне них
+         window.onclick = function(event) {
+            const modals = ['myModal', 'myModalSoviet', 'myModalNovobel', 'myModalRailway'];
+            modals.forEach(modalId => {
+               const modal = document.getElementById(modalId);
+               if (event.target === modal) {
+                  modal.style.display = 'none';
+               }
+            });
+         };
+      }
+   </script>
+</body>
+</html>
